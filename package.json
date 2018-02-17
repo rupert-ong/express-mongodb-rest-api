@@ -1,0 +1,27 @@
+{
+  "name": "express-mongodb-rest-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon --inspect app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rupert-ong/express-mongodb-rest-api.git"
+  },
+  "author": "Rupert Ong",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rupert-ong/express-mongodb-rest-api/issues"
+  },
+  "homepage": "https://github.com/rupert-ong/express-mongodb-rest-api#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "morgan": "^1.9.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.15.0"
+  }
+}

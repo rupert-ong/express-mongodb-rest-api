@@ -7,7 +7,7 @@ const userSchema = new Schema({
   email: String,
   cars: [{
     type: Schema.Types.ObjectId,
-    ref: 'car'
+    ref: 'Car'
   }]
 });
 

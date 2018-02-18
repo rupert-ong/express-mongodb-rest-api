@@ -9,6 +9,7 @@ const usersRoutes = require('./routes/users');
 
 // DB
 mongoose.connect(process.env.MONGO_DB_CONNECTION);
+mongoose.Promise = global.Promise;
 
 // Middleware
 app.use(morgan('dev'));

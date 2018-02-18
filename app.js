@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
 const app = express();
 
@@ -11,6 +12,7 @@ mongoose.connect(process.env.MONGO_DB_CONNECTION);
 
 // Middleware
 app.use(morgan('dev'));
+app.use(bodyParser.json());
 
 // Routes
 app.use('/users', usersRoutes);

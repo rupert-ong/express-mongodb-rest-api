@@ -1,0 +1,5 @@
+{
+  "env" : {
+    "MONGO_DB_CONNECTION": "mongodb://username:password@hostname:port/dbname"
+  }
+}

@@ -1,6 +1,11 @@
 const User = require('../models/user');
 const Car = require('../models/car');
 
+const Joi = require('joi');
+const idSchema = Joi.object({
+  userId: Joi.string().regex(/^[0-9a-fA-F]{24}$/).required()
+});
+
 exports.get_users = async (req, res, next) => {
   const users = await User.find({});
   res.status(200).json(users);
@@ -12,6 +17,8 @@ exports.create_user = async (req, res, next) => {
 };
 
 exports.get_user = async (req, res, next) => {
+  const result = Joi.validate(req.params, idSchema);
+  console.log('Joi', result);
   const user = await User.findById(req.params.userId);
   res.status(200).json(user);
 };

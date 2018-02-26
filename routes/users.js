@@ -10,7 +10,7 @@ router.route('/')
 
 router.route('/:userId')
   .get(validateParam(schemas.idSchema, 'userId'), usersController.get_user)
-  .put(usersController.replace_user)
+  .put(validateParam(schemas.idSchema, 'userId'), validateBody(schemas.userSchema), usersController.replace_user)
   .patch(usersController.update_user);
 
 router.route('/:userId/cars')

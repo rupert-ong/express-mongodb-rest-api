@@ -21,9 +21,9 @@ exports.get_user = async (req, res, next) => {
 };
 
 exports.replace_user = async (req, res, next) => {
-  // TODO: Require req.body to contain all fields
-  const { userId } = req.params;
-  const userData = req.body;
+  // req.value.body created in routeHelpers Joi validation methods
+  const { userId } = req.value.params ? req.value.params : req.params;
+  const userData = req.value.body ? req.value.body : req.body;
 
   await User.findByIdAndUpdate(userId, userData);
   const updatedUser = await User.findById(userId)

@@ -51,5 +51,11 @@ exports.schemas = {
     firstName: Joi.string(),
     lastName: Joi.string(),
     email: Joi.string().email()
+  }),
+
+  carSchema: Joi.object().keys({
+    make: Joi.string().required(),
+    model: Joi.string().required(),
+    year: Joi.number().required()
   })
 };

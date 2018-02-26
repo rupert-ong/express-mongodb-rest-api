@@ -34,20 +34,22 @@ exports.update_user = async (req, res, next) => {
   // req.value.body created in routeHelpers Joi validation methods
   const { userId } = req.value.params ? req.value.params : req.params;
   const userData = req.value.body ? req.value.body : req.body;
-  
+
   await User.findByIdAndUpdate(userId, userData);
   const updatedUser = await User.findById(userId);
   res.status(200).json(updatedUser);
 };
 
 exports.get_user_cars = async (req, res, next) => {
-  const user = await User.findById(req.params.userId).populate('cars');
+  // req.value.body created in routeHelpers Joi validation methods
+  const { userId } = req.value.params ? req.value.params : req.params;
+  const user = await User.findById(userId).populate('cars');
   res.status(200).json(user.cars);
 };
 
 exports.create_user_car = async (req, res, next) => {
-  const { userId } = req.params;
-  const carData = req.body;
+  const { userId } = req.value.params ? req.value.params : req.params;
+  const carData = req.value.body ? req.value.body : req.body;
   const user = await User.findById(userId);
   const car = await Car.create({
     ...carData,

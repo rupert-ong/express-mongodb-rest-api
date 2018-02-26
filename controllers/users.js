@@ -7,7 +7,9 @@ exports.get_users = async (req, res, next) => {
 };
 
 exports.create_user = async (req, res, next) => {
-  const user = await User.create(req.body);
+  // req.value.body created in routeHelpers Joi validation methods
+  console.log(req.value);
+  const user = await User.create(req.value.body);
   res.status(201).json(user);
 };
 

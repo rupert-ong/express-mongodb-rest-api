@@ -26,3 +26,9 @@ exports.create_car = async (req, res, next) => {
 
   res.status(201).json(car);
 };
+
+exports.get_car = async (req, res, next) => {
+  const { carId } = req.value.params;
+  const car = await Car.findById(carId);
+  res.status(200).json(car);
+};

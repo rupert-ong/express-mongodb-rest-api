@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const app = express();
 
 const usersRoutes = require('./routes/users');
+const carsRoutes = require('./routes/cars');
 
 // DB
 mongoose.connect(process.env.MONGO_DB_CONNECTION);
@@ -17,6 +18,7 @@ app.use(bodyParser.json());
 
 // Routes
 app.use('/users', usersRoutes);
+app.use('/cars', carsRoutes);
 
 // 404 Errors
 app.use((req, res, next) => {

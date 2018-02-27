@@ -53,13 +53,13 @@ exports.schemas = {
     email: Joi.string().email()
   }),
 
-  carSchema: Joi.object().keys({
+  userCarSchema: Joi.object().keys({
     make: Joi.string().required(),
     model: Joi.string().required(),
     year: Joi.number().required(),
   }),
 
-  createCarSchema: Joi.object().keys({
+  carSchema: Joi.object().keys({
     make: Joi.string().required(),
     model: Joi.string().required(),
     year: Joi.number().required(),

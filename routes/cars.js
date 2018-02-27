@@ -5,7 +5,7 @@ const { validateBody, validateParam, schemas } = require('../helpers/routeHelper
 
 router.route('/')
   .get(CarsController.get_cars)
-  .post(validateBody(schemas.createCarSchema),
+  .post(validateBody(schemas.carSchema),
     CarsController.create_car);
 
 router.route('/:carId')

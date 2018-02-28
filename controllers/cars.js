@@ -49,4 +49,23 @@ exports.update_car = async (req, res, next) => {
   await Car.findByIdAndUpdate(carId, carData);
   const updatedCar = await Car.findById(carId);
   res.status(200).json(updatedCar);
-}
+};
+
+exports.delete_car = async (req, res, next) => {
+  const { carId } = req.value.params;
+
+  // Get car
+  const car = await Car.findById(carId);
+  if (!car) return res.status(404).json({ error: `Car doesn't exist` });
+
+  // Get seller
+  const sellerId = car.seller;
+  const seller = await User.findById(sellerId);
+
+  // Remove car and remove from user cars list
+  car.remove();
+  seller.cars.pull(car);
+  await seller.save();
+
+  res.status(200).json({ success: true });
+};

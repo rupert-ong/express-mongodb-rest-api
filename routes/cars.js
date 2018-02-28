@@ -16,6 +16,8 @@ router.route('/:carId')
     CarsController.replace_car)
   .patch(validateParam(schemas.idSchema, 'carId'),
     validateBody(schemas.carOptionalSchema),
-    CarsController.update_car);
+    CarsController.update_car)
+  .delete(validateParam(schemas.idSchema, 'carId'),
+    CarsController.delete_car);
 
 module.exports = router;

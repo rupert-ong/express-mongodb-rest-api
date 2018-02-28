@@ -41,3 +41,12 @@ exports.replace_car = async (req, res, next) => {
   const updatedCar = await Car.findById(carId);
   res.status(200).json(updatedCar);
 };
+
+exports.update_car = async (req, res, next) => {
+  const { carId } = req.value.params;
+  const carData = req.value.body;
+
+  await Car.findByIdAndUpdate(carId, carData);
+  const updatedCar = await Car.findById(carId);
+  res.status(200).json(updatedCar);
+}

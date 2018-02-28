@@ -13,6 +13,9 @@ router.route('/:carId')
     CarsController.get_car)
   .put(validateParam(schemas.idSchema, 'carId'),
     validateBody(schemas.userCarSchema),
-    CarsController.replace_car);
+    CarsController.replace_car)
+  .patch(validateParam(schemas.idSchema, 'carId'),
+    validateBody(schemas.carOptionalSchema),
+    CarsController.update_car);
 
 module.exports = router;

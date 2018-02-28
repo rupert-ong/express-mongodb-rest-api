@@ -64,5 +64,11 @@ exports.schemas = {
     model: Joi.string().required(),
     year: Joi.number().required(),
     seller: Joi.string().regex(/^[0-9a-fA-F]{24}$/).required()
+  }),
+
+  carOptionalSchema: Joi.object().keys({
+    make: Joi.string(),
+    model: Joi.string(),
+    year: Joi.number()
   })
 };

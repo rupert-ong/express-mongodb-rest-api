@@ -9,6 +9,8 @@ router.route('/')
   .post(validateBody(schemas.userCreateSchema),
     usersController.create_user);
 
+router.post('/login', validateBody(schemas.userLoginSchema), usersController.login_user);
+
 router.route('/:userId')
   .get(validateParam(schemas.idSchema, 'userId'),
     usersController.get_user)

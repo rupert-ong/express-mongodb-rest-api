@@ -1,4 +1,5 @@
 const Joi = require('joi');
+const jwt = require('jsonwebtoken');
 
 // Create a generic validation method middleware that takes
 // any schema checks a request parameter
@@ -48,6 +49,11 @@ exports.schemas = {
     email: Joi.string().email().required()
   }),
 
+  userLoginSchema: Joi.object().keys({
+    password: Joi.string().required(),
+    email: Joi.string().email().required()
+  }),
+
   userUpdateSchema: Joi.object().keys({
     firstName: Joi.string().required(),
     lastName: Joi.string().required(),
@@ -78,4 +84,19 @@ exports.schemas = {
     model: Joi.string(),
     year: Joi.number()
   })
+};
+
+exports.checkAuthentication = (req, res, next) => {
+  try {
+    // Put token in request header after login
+    // Key: Authorization
+    // Value: Bearer yourTokenValue
+    const token = req.headers.authorization.split(" ")[1];
+    console.log(token);
+    const decoded = jwt.verify(token, process.env.JWT_KEY);
+    req.userData = decoded;
+    next();
+  } catch (err) {
+    return res.status(401).json({ message: 'Authorization failed ' });
+  }
 };

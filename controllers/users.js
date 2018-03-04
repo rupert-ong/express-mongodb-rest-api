@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const Car = require('../models/car');
 
@@ -20,6 +21,27 @@ exports.create_user = async (req, res, next) => {
   userData.password = hash;
   const user = await User.create(userData);
   res.status(201).json(user);
+};
+
+exports.login_user = async (req, res, next) => {
+  const user = await User.findOne({ email: req.value.body.email });
+  if (!user) return res.status(401).json({ message: 'Authentication failed' });
+
+  const isValid = await bcrypt.compare(req.value.body.password, user.password);
+  if (isValid) {
+    const token = jwt.sign({
+      email: user.email,
+      userId: user._id
+    }, process.env.JWT_KEY, {
+        expiresIn: '1h'
+      });
+    return res.status(200).json({
+      message: 'Authentication successful',
+      token: token
+    });
+  } else { 
+    res.status(401).json({ message: 'Authentication failed' });
+  }
 };
 
 exports.get_user = async (req, res, next) => {

@@ -10,6 +10,11 @@ exports.get_users = async (req, res, next) => {
 exports.create_user = async (req, res, next) => {
   // req.value.body created in routeHelpers Joi validation methods
   console.log(req.value);
+  // Only allow user creation if email does not exist
+  const usersWithEmail = await User.find({ email: req.value.body.email });
+  if (usersWithEmail.length >= 1) {
+    res.status(409).json({ message: 'User exists' });
+  }
   const hash = await bcrypt.hash(req.value.body.password, 10);
   let userData = req.value.body;
   userData.password = hash;

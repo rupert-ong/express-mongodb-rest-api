@@ -41,7 +41,14 @@ exports.schemas = {
     param: Joi.string().regex(/^[0-9a-fA-F]{24}$/).required()
   }),
 
-  userSchema: Joi.object().keys({
+  userCreateSchema: Joi.object().keys({
+    firstName: Joi.string().required(),
+    lastName: Joi.string().required(),
+    password: Joi.string().required(),
+    email: Joi.string().email().required()
+  }),
+
+  userUpdateSchema: Joi.object().keys({
     firstName: Joi.string().required(),
     lastName: Joi.string().required(),
     email: Joi.string().email().required()

@@ -6,14 +6,14 @@ const { validateParam, validateBody, schemas } = require('../helpers/routeHelper
 
 router.route('/')
   .get(usersController.get_users)
-  .post(validateBody(schemas.userSchema),
+  .post(validateBody(schemas.userCreateSchema),
     usersController.create_user);
 
 router.route('/:userId')
   .get(validateParam(schemas.idSchema, 'userId'),
     usersController.get_user)
   .put(validateParam(schemas.idSchema, 'userId'),
-    validateBody(schemas.userSchema),
+    validateBody(schemas.userUpdateSchema),
     usersController.replace_user)
   .patch(validateParam(schemas.idSchema, 'userId'),
     validateBody(schemas.userOptionalSchema),

@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const User = require('../models/user');
 const Car = require('../models/car');
 
@@ -9,7 +10,10 @@ exports.get_users = async (req, res, next) => {
 exports.create_user = async (req, res, next) => {
   // req.value.body created in routeHelpers Joi validation methods
   console.log(req.value);
-  const user = await User.create(req.value.body);
+  const hash = await bcrypt.hash(req.value.body.password, 10);
+  let userData = req.value.body;
+  userData.password = hash;
+  const user = await User.create(userData);
   res.status(201).json(user);
 };
 

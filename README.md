@@ -1,5 +1,5 @@
 # Node.js/Express RESTful API
-An async/await Node.js API tutorial project as seen on CodeWorkr.
+A persistent, async/await based Node.js API tutorial project with request parameter and body validation as seen on CodeWorkr.
 
 **Enhancements to Original Project**
 * Add user password encryption (bcrypt) and login route
@@ -38,3 +38,4 @@ npm run start
 - Node.js and Express
 - MongoDB and Mongoose
 - JWT
+- Joi (Object Schema Validation)
